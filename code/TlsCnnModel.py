@@ -1,9 +1,29 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import numpy as np
 from extractTlsFeatures import extract_tls_features as tlsft
 from torch.utils.data import Dataset, DataLoader
+from pathlib import Path
+import os
+
+curdir = Path(__file__).resolve().parent
+pcapdir="D:\\pcap"
+pcapdir = Path(pcapdir)
+train_dirs = [
+    "tormeek",
+    "normal",
+]
+detect_file = "meek_1c1g_2020-05-27_04_37_07.836652.pcap"
+pth_file = "tls_classifier_model.pth"
+
+train_dirs = list(map(lambda x:pcapdir/Path(x),train_dirs))
+train_files = list(map( lambda x: list(map(lambda y: x/Path(y), os.listdir(x))) ,train_dirs))
+train_labels = [1]*len(train_files[0]) + [0]*len(train_files[1])
+train_files = train_files[0]+train_files[1]
+
+# detect_file = pcapdir/Path(detect_file)
+pth_file = curdir/Path(pth_file)
+
 class FlowDataset(Dataset):
     def __init__(self, pcap_files, labels):
         """
@@ -40,8 +60,7 @@ class TLSClassifier(nn.Module):
         return self.fc_layers(x)
 
 class TlsCnnModel:
-    # initial_file="tls_classifier_model.pth"                             #默认地址     #[filepath]
-    initial_file="%s\\..\\tls_classifier_model.pth"%__file__
+    initial_file=pth_file
     def __init__(self,load_file=None,load=False):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {self.device}")
@@ -126,17 +145,12 @@ class TlsCnnModel:
             torch.save(self.model.state_dict(), TlsCnnModel.initial_file)
         
 
-
 if __name__=="__main__":
+    
+    detect_file = "meek_1c1g_2020-05-27_04_37_07.836652.pcap"
     myAI=TlsCnnModel()
-    train_files = [
-        # ".\\meek_1c1g_2020-05-27_04_37_07.836652.pcap",                                               #[filepath]
-        "%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__,
-        # ".\\normal.pcap"                                                                              #[filepath]
-        "%s\\..\\normal.pcap"%__file__,
-    ]
+    
     train_labels=[1,0]
     myAI.train_model(train_files,train_labels,epochs=20)
-    # test_result = myAI.detect_traffic(".\\meek_1c1g_2020-05-27_04_37_07.836652.pcap")
-    test_result = myAI.detect_traffic("%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__)    #[filepath]
-    print("Detection Results:", test_result)
+    # test_result = myAI.detect_traffic(detect_files)                    #[filepath]
+    # print("Detection Results:", test_result)
