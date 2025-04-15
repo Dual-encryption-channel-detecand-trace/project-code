@@ -50,7 +50,7 @@ class TLSClassifier(nn.Module):
     def __init__(self):
         super(TLSClassifier, self).__init__()
         self.fc_layers = nn.Sequential(
-            nn.Linear(25, 64),  # 输入特征为 25
+            nn.Linear(42, 64),  # 输入特征为 42
             nn.ReLU(),
             nn.Dropout(0.5),
             nn.Linear(64, 2)  # 输出为 2 类
