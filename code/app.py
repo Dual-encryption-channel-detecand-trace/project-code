@@ -37,8 +37,8 @@ def terminal_ver(predictAI):
         predict_result=predictAI.detect_traffic(pcap_file)
         print("Detection Results:", predict_result)
 
-load_file=".\\tls_classifier_model.pth"                           #[filepath]
-# load_file="D:\\DTDEC\\catch\\tls_classifier_model.pth"
+# load_file=".\\tls_classifier_model.pth"                           #[filepath]
+load_file="D:\\DTDEC\\catch\\tls_classifier_model.pth"
 if __name__=="__main__":
     predictAI=TlsCnnModel(load_file=load_file)
     print("导入训练结果成功")

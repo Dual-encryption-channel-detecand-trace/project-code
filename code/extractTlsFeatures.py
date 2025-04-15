@@ -1,8 +1,9 @@
 import numpy as np
 import pyshark
+import json
 import os
 
-def extract_tls_features(input_file):
+def extract_tls_features(input_file,label):
     """
     提取 TLS ClientHello 特征，包括版本、密码套件列表、扩展类型列表和服务器名称等。
     """
@@ -13,9 +14,22 @@ def extract_tls_features(input_file):
             input_file=input_file,
             display_filter="tls.handshake.type == 1",
             use_ek=True,
-            # tshark_path="D:\\Program Files\\Wireshark\\tshark.exe",        #我这里需要设置这个    #[filepath]
+            tshark_path="D:\\Program Files\\Wireshark\\tshark.exe",        #我这里需要设置这个    #[filepath]
         )
-        for packet in cap:
+
+        capx=[]
+        # f=open(".\\fliteredservername.json","r")
+        f=open("%s\\..\\fliteredservername.json"%__file__,"r")
+        strjson=f.read()
+        f.close()
+        checkdomain=json.loads(strjson)
+        if label==1:
+            for p in cap:
+                if p.tls.handshake.extensions.server.name.value in checkdomain:
+                    capx.append(p)
+        else:
+            capx=cap
+        for packet in capx:
             try:
                 tls = packet.tls
                 # 提取特征
