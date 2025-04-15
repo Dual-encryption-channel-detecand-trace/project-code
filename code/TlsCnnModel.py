@@ -150,7 +150,6 @@ if __name__=="__main__":
     detect_file = "meek_1c1g_2020-05-27_04_37_07.836652.pcap"
     myAI=TlsCnnModel()
     
-    train_labels=[1,0]
     myAI.train_model(train_files,train_labels,epochs=20)
     # test_result = myAI.detect_traffic(detect_files)                    #[filepath]
     # print("Detection Results:", test_result)
