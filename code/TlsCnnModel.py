@@ -30,7 +30,7 @@ class TLSClassifier(nn.Module):
     def __init__(self):
         super(TLSClassifier, self).__init__()
         self.fc_layers = nn.Sequential(
-            nn.Linear(25, 64),  # 输入特征为 25
+            nn.Linear(42, 64),  # 输入特征为 42
             nn.ReLU(),
             nn.Dropout(0.5),
             nn.Linear(64, 2)  # 输出为 2 类
@@ -40,8 +40,8 @@ class TLSClassifier(nn.Module):
         return self.fc_layers(x)
 
 class TlsCnnModel:
-    # initial_file="tls_classifier_model.pth"                             #默认地址     #[filepath]
-    initial_file="%s\\..\\tls_classifier_model.pth"%__file__
+    initial_file="tls_classifier_model.pth"    #默认地址    #[filepath]
+    initial_file="%s\\..\\tls_classifier_model.pth"%__file__    #[filepath]
     def __init__(self,load_file=None,load=False):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {self.device}")
@@ -130,13 +130,13 @@ class TlsCnnModel:
 if __name__=="__main__":
     myAI=TlsCnnModel()
     train_files = [
-        # ".\\meek_1c1g_2020-05-27_04_37_07.836652.pcap",                                               #[filepath]
-        "%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__,
-        # ".\\normal.pcap"                                                                              #[filepath]
-        "%s\\..\\normal.pcap"%__file__,
+        "meek_1c1g_2020-05-27_04_37_07.836652.pcap",    #[filepath]
+        # "%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__,    #[filepath]
+        "normal.pcap"    #[filepath]
+        # "%s\\..\\normal.pcap"%__file__,    #[filepath]
     ]
     train_labels=[1,0]
     myAI.train_model(train_files,train_labels,epochs=20)
-    # test_result = myAI.detect_traffic(".\\meek_1c1g_2020-05-27_04_37_07.836652.pcap")
-    test_result = myAI.detect_traffic("%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__)    #[filepath]
+    test_result = myAI.detect_traffic("meek_1c1g_2020-05-27_04_37_07.836652.pcap")    #[filepath]
+    # test_result = myAI.detect_traffic("%s\\..\\meek_1c1g_2020-05-27_04_37_07.836652.pcap"%__file__)    #[filepath]
     print("Detection Results:", test_result)
