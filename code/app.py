@@ -1,6 +1,6 @@
 import json
 from extractTlsFeatures import extract_tls_features as tlsft
-# from mysniffer import pktsniff
+from mysniffer import pktsniff
 from TlsCnnModel import TlsCnnModel
 import os
 
