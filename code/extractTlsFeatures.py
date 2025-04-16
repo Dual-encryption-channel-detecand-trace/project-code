@@ -1,7 +1,11 @@
 import numpy as np
 import pyshark
 import json
-import os
+from pathlib import Path
+
+flit_file=Path("fliteredservername.json")
+curdir=Path(__file__).resolve().parent
+flit_file=curdir/flit_file
 
 def extract_tls_features(input_file,label):
     """
@@ -17,8 +21,7 @@ def extract_tls_features(input_file,label):
         )
 
         capx=[]
-        # f=open(".\\fliteredservername.json","r")
-        f=open("%s\\..\\fliteredservername.json"%__file__,"r")
+        f=open(flit_file,"r")
         strjson=f.read()
         f.close()
         checkdomain=json.loads(strjson)

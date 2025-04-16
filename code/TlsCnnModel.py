@@ -79,7 +79,6 @@ class TlsCnnModel:
         输入pcap文件list
         """
         # 导入pcap数据
-        print(train_files)
         dataset = FlowDataset(train_files, train_labels)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
         print("Dataset loaded successfully.")
