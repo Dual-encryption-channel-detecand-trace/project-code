@@ -18,7 +18,6 @@ def extract_tls_features(input_file):
         curdir = Path(__file__).resolve().parent
         f = open(curdir / "fliteredservername.json", "r")
         strjson = f.read()
->>>>>>> b3bb9a0f306b8115f18eccc3ef5a4d4de93d64de
         f.close()
         for packet in cap:
             try:
