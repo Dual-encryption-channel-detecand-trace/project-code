@@ -31,7 +31,7 @@ def extract_tls_features(input_file):
                 extensions_num = len(extensions)
                 checkdomain = json.loads(strjson)
                 servername = 0  # 默认值
-                for p in cap:
+                for p in packet:
                     try:
                         if p.tls.handshake.extensions.server.name.value in checkdomain:
                             servername = 1
