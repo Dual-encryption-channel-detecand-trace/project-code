@@ -3,11 +3,7 @@ import pyshark
 import json
 from pathlib import Path
 
-flit_file=Path("fliteredservername.json")
-curdir=Path(__file__).resolve().parent
-flit_file=curdir/flit_file
-
-def extract_tls_features(input_file, label):
+def extract_tls_features(input_file):
     """
     提取 TLS ClientHello 特征，包括版本、密码套件列表、扩展类型列表和服务器名称等。
     """
@@ -18,14 +14,9 @@ def extract_tls_features(input_file, label):
             display_filter="tls.handshake.type == 1",
             use_ek=True,
         )
-<<<<<<< HEAD
-
-        capx=[]
-        f=open(flit_file,"r")
-        strjson=f.read()
-=======
         
-        f = open("fliteredservername.json", "r")
+        curdir = Path(__file__).resolve().parent
+        f = open(curdir / "fliteredservername.json", "r")
         strjson = f.read()
 >>>>>>> b3bb9a0f306b8115f18eccc3ef5a4d4de93d64de
         f.close()
@@ -40,14 +31,13 @@ def extract_tls_features(input_file, label):
                 extensions_num = len(extensions)
                 checkdomain = json.loads(strjson)
                 servername = 0  # 默认值
-                if label == 1:
-                    for p in cap:
-                        try:
-                            if p.tls.handshake.extensions.server.name.value in checkdomain:
-                                servername = 1
-                                break  # 找到一个匹配的即可
-                        except AttributeError:
-                            continue
+                for p in cap:
+                    try:
+                        if p.tls.handshake.extensions.server.name.value in checkdomain:
+                            servername = 1
+                            break  # 找到一个匹配的即可
+                    except AttributeError:
+                        continue
                 # 将密码套件和扩展类型转换为数值特征
                 cipher_suites_encoded = [cs for cs in cipher_suites]
                 extensions_encoded = [ext for ext in extensions]
