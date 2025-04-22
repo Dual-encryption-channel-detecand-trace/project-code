@@ -4,7 +4,7 @@ import torch.optim as optim
 from extractTlsFeatures import extract_tls_features as tlsft
 from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
-import pandas as pd
+import json
 import os
 import numpy as np
 
@@ -15,7 +15,7 @@ train_dirs = [
     "tormeek",
     "normal",
 ]
-detect_files =list(map(lambda x: pcapdir / Path("target") / x, os.listdir(pcapdir / Path("target"))))
+detect_files =list(map(lambda x: pcapdir / Path("tormeek") / x, os.listdir(pcapdir / Path("tormeek"))))
 pth_file = "tls_classifier_model.pth"
 
 train_dirs = list(map(lambda x: pcapdir / Path(x), train_dirs))
@@ -25,6 +25,11 @@ train_files = train_files[0] + train_files[1]
 
 pth_file = curdir / Path(pth_file)
 
+def np2list(npobj):
+    if type(npobj)==np.float32:
+        return float(npobj)
+    npobj=list(map(lambda x:np2list(x),npobj))
+    return npobj
 
 class TLSClassifier(nn.Module):
     """
@@ -105,7 +110,18 @@ class TlsCnnModel:
 
         for idx, file in enumerate(pcap_files):
             label = labels[idx] if labels is not None else None
-            feats = tlsft(file, label)
+            if label != None :
+                feat_file=Path(file).parent.parent/"features"/("tormeek" if label==1 else "normal")/(str(Path(file).stem)+".json")
+                if feat_file.is_file():
+                    with open(feat_file,'r') as f:
+                        feats = json.load(f)
+                else:
+                    with open(feat_file,'w') as f:
+                        feats = tlsft(file)
+                        json.dump(np2list(feats),f)
+                feats=np.array(feats,dtype=np.float32)
+            else:
+                feats = tlsft(file)
             if feats is not None and len(feats) > 0:
                 for feat in feats:
                     features.append(feat)  # 只存储特征
@@ -266,3 +282,4 @@ if __name__ == "__main__":
     predictions = myAI.detect(detect_files)
     for file, pred in zip(detect_files, predictions):
         print(f"File: {file}, Prediction: {pred}")
+    predictions = myAI.detect(detect_files)
