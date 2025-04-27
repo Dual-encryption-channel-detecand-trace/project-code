@@ -1,38 +1,93 @@
+<!--我直接让AI生成的界面-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <title>上传文件</title>
+    <title>分析结果</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css">
 </head>
 <body>
-    <div id="content" class="content">
-        <div id="pcaptable">
-            <table id="showtable" class="table"> <!-- 如果我们最后要做表的话 -->
-                <tr>
-                    <th> 文件名 </th>
-                    <th> 结果 </th>
-                </tr>
-                {% for result in results%}
-                    <tr>
-                        {% for data in result%}
-                        <td> {{ data }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
+    <!-- Header同upload.html -->
+    <header id="header" class="bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand fw-bold text-primary" href="/index">隐流明鉴</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="upload.html">文件上传</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container main-container">
+        <div class="row g-4">
+            <!-- 侧边栏 -->
+            <aside class="col-lg-3 sidebar d-none d-lg-block">
+                <h5 class="text-secondary mb-3">文件统计</h5>
+                <div class="text-center">
+                    <div class="display-6 text-primary">{{results|length}}</div>
+                    <small class="text-secondary">已分析文件</small>
+                </div>
+            </aside>
+
+            <!-- 主内容 -->
+            <div class="col-lg-9">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">分析结果</h3>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>文件名</th>
+                                        <th>结果</th>
+                                    </tr>
+                                </thead>
+                                <tbody>{% for result in results%}
+                                    <tr>
+                                        {% for data in result%}
+                                        <td> {{ data }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}</tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary">
+                                <i class="bi bi-download me-2"></i>导出结果
+                            </button>
+                            <a href="/upload">
+                                <button class="btn custom-btn text-white">
+                                    重新上传
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="showgraph" class="graph">
-            <!-- 如果我们有图的话 -->
+    </main>
+
+    <footer class="fixed-bottom py-3">
+        <div class="container text-center text-secondary">
+            <span> 隧光 | 界面样式与布局均由deepseek生成</span>
         </div>
-    </div>
-    <a  href="/upload"><button class="submit" name="submit">重新提交</button></a>
-    <div id="footer" class="footer">隧光</div>
-    <!-- <script src="/download/jquery-3.6.4.min.js"></script> -->
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/download?filename=/js/show.js"></script>
 </body>
 </html>

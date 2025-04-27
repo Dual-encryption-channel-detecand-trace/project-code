@@ -1,18 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="/download/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <title>主页</title>
+    <title>智能文件分析系统</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css">
 </head>
 <body>
-    
-    <div id="footer" class="footer">隧光</div>
-    <!-- <script src="/download/jquery-3.6.4.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="/download?filename=js/index.js"></script>
+    <!-- 导航栏 -->
+    <header id="header" class="bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand text-primary" href="/index">
+                <i class="bi bi-files-alt me-2"></i>隐流明鉴：Tor-Meek双重加密通信隧道检测系统 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upload.html">文件上传</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="container main-container">
+        <div class="row g-5">
+            <!-- 侧边导航 -->
+            <aside class="col-lg-3">
+                <div class="sidebar">
+                    <h5 class="text-secondary mb-3">核心功能</h5>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-shield-check me-2"></i>安全检测
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-graph-up me-2"></i>智能分析
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="bi bi-cloud-arrow-down me-2"></i>云端存储
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- 主要内容 -->
+            <div class="col-lg-9">
+                <div class="row g-4">
+                    <!-- 欢迎横幅 -->
+                    <div class="col-12">
+                        <div class="card card-effect shadow">
+                            <div class="card-body text-center py-5">
+                                <h1 class="display-5 fw-bold text-primary mb-4">
+                                    <i class="bi bi-cloud-upload"></i> 智能文件分析平台
+                                </h1>
+                                <p class="lead text-secondary mb-4">
+                                    吹，硬吹。也国德快办性斯珍卑。
+                                </p>
+                                <a href="upload.html" class="btn custom-btn btn-lg text-white">
+                                    立即体验 <i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 功能特色 -->
+                    <div class="col-md-6">
+                        <div class="card card-effect shadow h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="feature-icon d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-lightning-charge text-white fs-4"></i>
+                                    </div>
+                                    <h3 class="ms-3 mb-0">特色一</h3>
+                                </div>
+                                <p class="text-secondary">吹的牛都往这里放,后面是随机中文字符。如小的快其徨韩变秦冈才承身非丰釜，杀仇选冒。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-effect shadow h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="feature-icon d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-shield-lock text-white fs-4"></i>
+                                    </div>
+                                    <h3 class="ms-3 mb-0">特色二</h3>
+                                </div>
+                                <p class="text-secondary">吹的牛都往这里放,后面是随机中文字符。视起勉然韩斗慨他前他，谢若花促老因为了来上是德不才力尘，找宫。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="page-footer py-4 fixed-bottom">
+        <div class="container text-center">
+            <div class="d-flex justify-content-center mb-2">
+                <a href="#" class="text-secondary mx-3"><i class="bi bi-github"></i></a>
+                <a href="#" class="text-secondary mx-3"><i class="bi bi-envelope"></i></a>
+                <a href="#" class="text-secondary mx-3"><i class="bi bi-twitter"></i></a>
+            </div>
+            <span> 隧光 | 界面样式与布局均由deepseek生成</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,7 +1,4 @@
 "use strict"
-// $(()=>{
-//     alert($("#upload").attr("action"))
-// })
 function checkpcapfile(file)
 {
     if(file.name=="")

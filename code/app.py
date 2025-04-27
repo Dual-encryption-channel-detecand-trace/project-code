@@ -12,7 +12,7 @@ def randstr(len):
 
 # 先准备一个AI
 myai=myAI()
-#实际上应该每个线程一个
+# 实际上应该每个线程一个
 
 # 后端验证文件函数
 def checkfile(file):
@@ -26,14 +26,12 @@ temporarydir=Path("D:\\pcap")
 @app.route("/index")
 @app.route("/index.html")
 def index():
-    print(11111)
     return render_template("index.html")
 
 # 上传
 @app.route("/upload")
 @app.route("/upload.html")
 def upload():
-    print(22222)
     return render_template("upload.html")
 
 # 展示
@@ -41,13 +39,11 @@ def upload():
 @app.route("/show.html")
 def show():
     files=request.args.get("files")
-    print(files)
     dir=temporarydir/"temporary"/files
 
     # 从灵石位置获取pcap文件
     files=dir.glob("*.pcap")
     files=list(map(lambda x:str(x),files))
-    print(files)
     
     # 运行AI
     loop=asyncio.new_event_loop() # pyshark太傻了，没有loop就不跑了
@@ -58,7 +54,9 @@ def show():
     # return "end"
 
     # 返回结果
-    results=list(zip(map(lambda file:str(Path(file).name),files),results))
+    results=map(lambda result:"tormeek" if result!=0 else "normal",results)
+    files=map(lambda file:str(Path(file).name),files)
+    results=list(zip(files,results))
     return render_template("show.html.j2",results=results)
 
 
@@ -106,5 +104,5 @@ def notfound(invalid_path):
     return render_template("404.html"),404
 
 if __name__=="__main__":
-    app.run()
-    # app.run(debug=True)
+    # app.run()
+    app.run(debug=True)

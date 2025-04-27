@@ -1,25 +1,72 @@
+<!-- upload.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <title>上传文件</title>
+    <title>文件上传</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css">
 </head>
 <body>
-    <div id="content" class="content">
-        <form id="upload" name="upload" action="/uploadpcap" method="post" class="form" enctype="multipart/form-data">
-            <!-- <input id="uploadpcap" type="file" name="file" multiple/><br> -->
-            <input id="uploadpcap" type="file" name="file" accept=".pcap" multiple/><br>
-            <input type="submit" value="提交" />
-            <!-- 小心文件上传漏洞 -->
-        </form>
-    </div>
-    <div id="footer" class="footer">隧光</div>
-    <!-- <script src="/download/jquery-3.6.4.min.js"></script> -->
+    <!-- Header -->
+    <header id="header" class="bg-white shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand fw-bold text-primary" href="/index">隐流明鉴</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="upload.html">文件上传</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main" class="container main-container">
+        <div class="row g-4">
+            <!-- 侧边栏 -->
+            <aside class="col-lg-3 sidebar d-none d-lg-block">
+                <h5 class="text-secondary mb-3">操作指南</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">1. 选择多个文件</li>
+                    <li class="mb-2">2. 点击提交按钮</li>
+                    <li class="mb-2">3. 查看分析结果</li>
+                </ul>
+            </aside>
+
+            <!-- 主内容 -->
+            <div class="col-lg-9">
+                <div class="card upload-card shadow">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">📁 文件上传</h3>
+                        <form id="upload" action="/uploadpcap" method="post">
+                            <div class="mb-4">
+                                <input id="uploadpcap" class="form-control" type="file" name="file" accept=".pcap" multiple required>
+                            </div>
+                            <input type="submit" class="btn custom-btn text-white" value="提交文件"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="fixed-bottom py-3">
+        <div class="container text-center text-secondary">
+            <span> 隧光 | 界面样式与布局均由deepseek生成</span>
+        </div>
+    </footer>
+
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/download?filename=/js/upload.js"></script>
 </body>
 </html>
