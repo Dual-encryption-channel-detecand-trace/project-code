@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from extractTlsFeatures import extract_tls_features as tlsft
+from .extractTlsFeatures import extract_tls_features as tlsft
 from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
 import json
@@ -110,6 +110,7 @@ class TlsCnnModel:
 
         for idx, file in enumerate(pcap_files):
             label = labels[idx] if labels is not None else None
+            
             if label != None :
                 feat_file=Path(file).parent.parent/"features"/("tormeek" if label==1 else "normal")/(str(Path(file).stem)+".json")
                 if feat_file.is_file():
@@ -224,7 +225,7 @@ class TlsCnnModel:
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
 
         # 加载模型
-        self.model.load_state_dict(torch.load(self.model_path))
+        self.model.load_state_dict(torch.load(self.model_path,map_location=self.device))
         self.model.eval()
 
         predictions = []

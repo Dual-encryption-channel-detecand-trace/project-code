@@ -9,16 +9,14 @@ def extract_tls_features(input_file):
     """
     features = []
     try:
-        cap = pyshark.FileCapture(
+        cap=pyshark.FileCapture(
             input_file=input_file,
             display_filter="tls.handshake.type == 1",
             use_ek=True,
         )
-        
         curdir = Path(__file__).resolve().parent
         f = open(curdir / "fliteredservername.json", "r")
         strjson = f.read()
->>>>>>> b3bb9a0f306b8115f18eccc3ef5a4d4de93d64de
         f.close()
         for packet in cap:
             try:
@@ -62,6 +60,7 @@ def extract_tls_features(input_file):
                     feature_vector = feature_vector[:max_length]
 
                 features.append(feature_vector)
+                
             except Exception as e:
                 print(f"Error processing packet: {e}")
                 continue

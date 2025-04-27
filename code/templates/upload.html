@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>上传文件</title>
+</head>
+<body>
+    <div id="content" class="content">
+        <form id="upload" name="upload" action="/uploadpcap" method="post" class="form" enctype="multipart/form-data">
+            <!-- <input id="uploadpcap" type="file" name="file" multiple/><br> -->
+            <input id="uploadpcap" type="file" name="file" accept=".pcap" multiple/><br>
+            <input type="submit" value="提交" />
+            <!-- 小心文件上传漏洞 -->
+        </form>
+    </div>
+    <div id="footer" class="footer">隧光</div>
+    <!-- <script src="/download/jquery-3.6.4.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="/download?filename=/js/upload.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>上传文件</title>
+</head>
+<body>
+    <div id="content" class="content">
+        <div id="pcaptable">
+            <table id="showtable" class="table"> <!-- 如果我们最后要做表的话 -->
+                <tr>
+                    <th> 文件名 </th>
+                    <th> 结果 </th>
+                </tr>
+                {% for result in results%}
+                    <tr>
+                        {% for data in result%}
+                        <td> {{ data }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div id="showgraph" class="graph">
+            <!-- 如果我们有图的话 -->
+        </div>
+    </div>
+    <a  href="/upload"><button class="submit" name="submit">重新提交</button></a>
+    <div id="footer" class="footer">隧光</div>
+    <!-- <script src="/download/jquery-3.6.4.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="/download?filename=/js/show.js"></script>
+</body>
+</html>
