@@ -15,7 +15,7 @@ train_dirs = [
     "tormeek",
     "normal",
 ]
-detect_files =list(map(lambda x: pcapdir / Path("tormeek") / x, os.listdir(pcapdir / Path("tormeek"))))
+detect_files =list(map(lambda x: pcapdir / Path("target") / x, os.listdir(pcapdir / Path("target"))))
 pth_file = "tls_classifier_model.pth"
 
 train_dirs = list(map(lambda x: pcapdir / Path(x), train_dirs))
@@ -283,4 +283,3 @@ if __name__ == "__main__":
     predictions = myAI.detect(detect_files)
     for file, pred in zip(detect_files, predictions):
         print(f"File: {file}, Prediction: {pred}")
-    predictions = myAI.detect(detect_files)
