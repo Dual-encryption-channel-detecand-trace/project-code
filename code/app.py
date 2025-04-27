@@ -19,6 +19,7 @@ def checkfile(file):
     return True
 
 filedir=Path(__file__).parent
+temporarydir=Path("D:\\pcap")
 
 # 初始界面
 @app.route("/")
@@ -41,7 +42,7 @@ def upload():
 def show():
     files=request.args.get("files")
     print(files)
-    dir=filedir/"temporary"/files
+    dir=temporarydir/"temporary"/files
 
     # 从灵石位置获取pcap文件
     files=dir.glob("*.pcap")
@@ -57,7 +58,7 @@ def show():
     # return "end"
 
     # 返回结果
-    results=list(zip(files,results))
+    results=list(zip(map(lambda file:str(Path(file).name),files),results))
     return render_template("show.html.j2",results=results)
 
 
@@ -79,7 +80,7 @@ def uploadpcap():
             if checkfile(file)==False:
                 return "存在不合法文件",400
         # 存放零食文件
-        temdir=filedir/"temporary"
+        temdir=temporarydir/"temporary"
         if not temdir.exists():
             temdir.mkdir()
         place=""
@@ -105,4 +106,5 @@ def notfound(invalid_path):
     return render_template("404.html"),404
 
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run()
+    # app.run(debug=True)
