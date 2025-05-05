@@ -15,9 +15,8 @@ def extract_tls_features(input_file):
             use_ek=True,
         )
         curdir = Path(__file__).resolve().parent
-        f = open(curdir / "fliteredservername.json", "r")
-        strjson = f.read()
-        f.close()
+        with open(curdir / "fliteredservername.json", "r") as f:
+            strjson = f.read()
         for packet in cap:
             try:
                 tls = packet.tls

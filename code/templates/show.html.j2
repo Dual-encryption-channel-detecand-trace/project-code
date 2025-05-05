@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>分析结果</title>
-    <link type="text/css" rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css">
+    {% if debug %}
+    <link type="text/css" rel="stylesheet" href="/download?filename=/websource/bootstrap-5.3.3.min.css" />
+    {% else %}
+    <link type="text/css" rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    {% endif %}
+    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css" />
 </head>
 <body>
     <!-- Header同upload.html -->
@@ -19,10 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">首页</a>
+                        <a class="nav-link" href="index">首页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="upload.html">文件上传</a>
+                        <a class="nav-link active" href="upload">文件上传</a>
                     </li>
                 </ul>
             </div>
@@ -39,7 +43,6 @@
                     <small class="text-secondary">已分析文件</small>
                 </div>
             </aside>
-
             <!-- 主内容 -->
             <div class="col-lg-9">
                 <div class="card shadow">
@@ -54,13 +57,15 @@
                                         <th>结果</th>
                                     </tr>
                                 </thead>
-                                <tbody>{% for result in results%}
+                                <tbody>
+                                {% for result in results %}
                                     <tr>
-                                        {% for data in result%}
+                                    {% for data in result %}
                                         <td> {{ data }}</td>
-                                        {% endfor %}
+                                    {% endfor %}
                                     </tr>
-                                {% endfor %}</tbody>
+                                {% endfor %}
+                                </tbody>
                             </table>
                         </div>
 
@@ -82,12 +87,16 @@
 
     <footer class="fixed-bottom py-3">
         <div class="container text-center text-secondary">
-            <span> 隧光 | 界面样式与布局均由deepseek生成</span>
+            <span> 隧光 | 隐流明鉴：Tor-Meek双重加密通信隧道检测系统 
         </div>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% if debug %}
+    <script src="/download?filename=/websource/jquery-3.7.1.min.js"></script>
+    <script src="/download?filename=/websource/bootstrap-5.3.3.min.js"></script>
+    {% else %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    {% endif %}
     <script src="/download?filename=/js/show.js"></script>
 </body>
 </html>

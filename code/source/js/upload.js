@@ -1,4 +1,7 @@
 "use strict"
+
+// 石用功能
+// 检验pcap文件合法性
 function checkpcapfile(file)
 {
     if(file.name=="")
@@ -6,10 +9,10 @@ function checkpcapfile(file)
     return true;
 }
 
+// 上传文件功能
 $(()=>{
-    // 提交表单
     $("#upload").on("submit",(e)=>{
-        // 拦截
+        // 拦截提交事件
         e.preventDefault();
         let $this=$("#upload");
 
@@ -21,6 +24,8 @@ $(()=>{
             if(checkpcapfile(files[i])==false)
             {
                 // 存在不合法文件
+                alert("存在不合法文件或没有文件上传");
+                return ;
             }
 
         // 上传
@@ -36,13 +41,13 @@ $(()=>{
         ,   processData: false
         ,   contentType: false
         ,   success: (response)=>{
-                $("body").text("上传成功！3秒后跳转");
+                $("#uploadcard").text("上传成功！3秒后跳转");
                 window.location.href=response.redirect_url;
             }
         ,   error: (xhr,status,error)=>{
-            alert(xhr.responseText)
-            //处理错误
-        }
+                //处理错误
+                alert(xhr.responseText)
+            }
         });
     });
 });
