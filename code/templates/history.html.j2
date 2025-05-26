@@ -28,7 +28,7 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="#" class="simple-text logo-mini"></a>
+          {# <a href="#" class="simple-text logo-mini">Black</a> #}
           <a href="#" class="simple-text logo-normal">功能</a>
         </div>
         <ul class="nav">
@@ -44,16 +44,10 @@
               <p>上传文件</p>
             </a>
           </li>
-          <li>
+          <li class="active">
             <a href="/history">
               <i class="tim-icons icon-calendar-60"></i>
               <p>提交历史</p>
-            </a>
-          </li>
-          <li>
-            <a href="/history">
-              <i class="tim-icons icon-check-2"></i>
-              <p>分析结果</p>
             </a>
           </li>
           {%if debug%}
@@ -159,23 +153,21 @@
           <div class="col-md-12">
             <div class="card ">
               <div class="card-header">
-                <h4 class="card-title">结果（文件）</h4>
+                <h4 class="card-title">上传历史</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive ps">
-                  <table class="table tablesorter " id="resultpcaps">
+                  <table class="table tablesorter " id="history">
                     <thead class=" text-primary">
-                      <tr><th>
-                        文件名
+                      <tr>
+                      <th>
+                        上传时间
                       </th>
                       <th>
-                        连接数
+                        文件数量
                       </th>
                       <th>
-                        总流量
-                      </th>
-                      <th>
-                        结论
+                        链接
                       </th>
                     </tr></thead>
                     <tbody>
@@ -195,55 +187,6 @@
                   </table>
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
               </div>
-            </div>
-
-            <div class="card ">
-              <div class="card-header">
-                <h4 class="card-title">结果（连接）</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive ps">
-                  <table class="table tablesorter " id="resultlinks">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          源ip
-                        </th>
-                        <th>
-                          目的ip
-                        </th>
-                        <th>
-                          流量
-                        </th>
-                        <th>
-                          结论
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {#
-                      <tr class="clicklink">
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      #}
-                    </tbody>
-                  </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">技术细节</h4>
-              </div>
-              <div id="">
             </div>
 
           </div>
@@ -324,7 +267,7 @@
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="/download?filename=/js/demo.js"></script>
     <script src="/download?filename=/js/stylejs.js"></script>
-    <script src="/download?filename=/js/show.js"></script>
+    <script src="/download?filename=/js/history.js"></script>
     <script src="/download?filename=/js/getuser.js"></script>
 </body>
 

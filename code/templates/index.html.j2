@@ -1,131 +1,550 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>隐流明鉴：Tor-Meek双重加密通信隧道检测系统 </title>
-    {% if debug %}
-    <link type="text/css" rel="stylesheet" href="/download?filename=/websource/bootstrap-5.3.3.min.css" />
-    {% else %}
-    <link type="text/css" rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
-    {% endif %}
-    <link type="text/css" rel="stylesheet" href="/download?filename=/css/mainstyle.css" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    index
+  </title>
+  
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="/download?filename=/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/download?filename=/websource/bootstrap.min.css" rel="stylesheet" />
+  <link href="/download?filename=/css/black-dashboard.css" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/download?filename=/css/demo.css" rel="stylesheet" />
+  {# <link href="/download?filename=/img/default-avatar.png" rel="icon" style="image/png"> #}
 </head>
-<body>
-    <!-- 导航栏 -->
-    <header id="header" class="bg-white shadow-sm fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-light container">
-            <a class="navbar-brand text-primary" href="/index">
-                <i class="bi bi-files-alt me-2"></i>隐流明鉴：Tor-Meek双重加密通信隧道检测系统 
+
+<body class=" ">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="green">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="sidebar-wrapper">
+        <div class="logo">
+          {# <a href="#" class="simple-text logo-mini">Black</a> #}
+          <a href="#" class="simple-text logo-normal">功能</a>
+        </div>
+        <ul class="nav">
+          <li class="active">
+            <a href="/index">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>主页</p>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="upload">文件上传</a>
-                    </li>
+          </li>
+          <li>
+            <a href="/upload">
+              <i class="tim-icons icon-wallet-43"></i>
+              <p>上传文件</p>
+            </a>
+          </li>
+          <li>
+            <a href="/history">
+              <i class="tim-icons icon-calendar-60"></i>
+              <p>提交历史</p>
+            </a>
+          </li>
+          {%if debug%}
+          <li>
+            <a href="/icons">
+              <i class="tim-icons icon-atom"></i>
+              <p>图标组件</p>
+            </a>
+          </li>
+          {# <li>
+            <a href="./notifications.html">
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Notifications</p>
+            </a>
+          </li> #}
+          <li>
+            <a href="./user.html">
+              <i class="tim-icons icon-single-02"></i>
+              <p>用户组件</p>
+            </a>
+          </li>
+          <li>
+            <a href="./tables.html">
+              <i class="tim-icons icon-puzzle-10"></i>
+              <p>表格组件</p>
+            </a>
+          </li>
+          <li>
+            <a href="./typography.html">
+              <i class="tim-icons icon-align-center"></i>
+              <p>弹窗组件</p>
+            </a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="/index">隐流明鉴</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto ">
+              <li id='aboutuser' class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="/download?filename=/img/anime3.png">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Profile</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Settings</a>
+                  </li>
+                  <div class="dropdown-divider"></div>
+                  <li class="nav-link">
+                    <a href="/do/logout" class="nav-item dropdown-item">退出登录</a>
+                  </li>
                 </ul>
-            </div>
-        </nav>
-    </header>
-
-    <!-- 主内容 -->
-    <main class="container main-container">
-        <div class="row g-5">
-            <!-- 侧边导航 -->
-            <aside class="col-lg-3">
-                <div class="sidebar">
-                    <h5 class="text-secondary mb-3">核心功能</h5>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-shield-check me-2"></i>安全检测
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-graph-up me-2"></i>智能分析
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <i class="bi bi-cloud-arrow-down me-2"></i>云端存储
-                        </a>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- 主要内容 -->
-            <div class="col-lg-9">
-                <div class="row g-4">
-                    <!-- 欢迎横幅 -->
-                    <div class="col-12">
-                        <div class="card card-effect shadow">
-                            <div class="card-body text-center py-5">
-                                <h1 class="display-5 fw-bold text-primary mb-4">
-                                    <i class="bi bi-cloud-upload"></i>隐流明鉴
-                                </h1>
-                                <p class="lead text-secondary mb-4">
-                                    Tor-Meek双重加密通信隧道检测系统
-                                </p>
-                                <a href="upload" class="btn custom-btn btn-lg text-white">
-                                    立即体验 <i class="bi bi-arrow-right ms-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 功能特色 -->
-                    <div class="col-md-6">
-                        <div class="card card-effect shadow h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="feature-icon d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-lightning-charge text-white fs-4"></i>
-                                    </div>
-                                    <h3 class="ms-3 mb-0">精准检测</h3>
-                                </div>
-                                <p class="text-secondary">高达95%的Tor-Meek检测准确率，多维度深度分析。</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card card-effect shadow h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="feature-icon d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-shield-lock text-white fs-4"></i>
-                                    </div>
-                                    <h3 class="ms-3 mb-0">实时监控</h3>
-                                </div>
-                                <p class="text-secondary">AI驱动的动态行为检测，实时检测，在线预警，实现快速响应。</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+              </li>
+              <li class="separator d-lg-none"></li>
+            </ul>
+          </div>
         </div>
-    </main>
-
-    <!-- 页脚 -->
-    <footer class="page-footer py-4 fixed-bottom">
-        <div class="container text-center">
-            <div class="d-flex justify-content-center mb-2">
-                <a href="#" class="text-secondary mx-3"><i class="bi bi-github"></i></a>
-                <a href="#" class="text-secondary mx-3"><i class="bi bi-envelope"></i></a>
-                <a href="#" class="text-secondary mx-3"><i class="bi bi-twitter"></i></a>
+      </nav>
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
             </div>
-            <span> 隧光 | 隐流明鉴：Tor-Meek双重加密通信隧道检测系统 </span>
+            <div class="modal-footer">
+            </div>
+          </div>
         </div>
-    </footer>
-    {% if debug %}
-    <script src="/download?filename=/websource/jquery-3.7.1.js"></script>
-    <script src="/download?filename=/websource/bootstrap-5.3.3.js"></script>
-    {% else %}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    {% endif %}
+      </div>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category">Total Shipments</h5>
+                    <h2 class="card-title">Performance</h2>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                      <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                        <input type="radio" name="options" autocomplete="off" checked> Accounts
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="1">
+                        <input type="radio" name="options" autocomplete="off"> Purchases
+                      </label>
+                      <label class="btn btn-sm btn-primary btn-simple " id="2">
+                        <input type="radio" name="options" autocomplete="off"> Sessions
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="chartBig1"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <h5 class="card-category">Total Shipments</h5>
+                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary "></i> 763,215</h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area">
+                  <canvas id="chartLinePurple"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <h5 class="card-category">Daily Sales</h5>
+                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area">
+                  <canvas id="CountryChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-chart">
+              <div class="card-header ">
+                <h5 class="card-category">Completed Tasks</h5>
+                <h3 class="card-title"><i class="tim-icons icon-send text-success "></i> 12,100K</h3>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area">
+                  <canvas id="chartLineGreen"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12">
+            <div class="card card-tasks">
+              <div class="card-header ">
+                <h6 class="title d-inline">Tasks(5)</h6>
+                <p class="card-category d-inline">today</p>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-link dropdown-toggle btn-icon" data-toggle="dropdown">
+                    <i class="tim-icons icon-settings-gear-63"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#pablo">Action</a>
+                    <a class="dropdown-item" href="#pablo">Another action</a>
+                    <a class="dropdown-item" href="#pablo">Something else</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body ">
+                <div class="table-full-width table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">Update the Documentation</p>
+                          <p class="text-muted">Dwuamish Head, Seattle, WA 8:47 AM</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="" checked="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">GDPR Compliance</p>
+                          <p class="text-muted">The GDPR is a regulation that requires businesses to protect the personal data and privacy of Europe citizens for transactions that occur within EU member states.</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">Solve the issues</p>
+                          <p class="text-muted">Fifty percent of all respondents said they would be more likely to shop at a company </p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">Release v2.0.0</p>
+                          <p class="text-muted">Ra Ave SW, Seattle, WA 98116, SUA 11:19 AM</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">Export the processed files</p>
+                          <p class="text-muted">The report also shows that consumers will not easily forgive a company once a breach exposing their personal data occurs. </p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" value="">
+                              <span class="form-check-sign">
+                                <span class="check"></span>
+                              </span>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="title">Arival at export process</p>
+                          <p class="text-muted">Capitol Hill, Seattle, WA 12:34 AM</p>
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                            <i class="tim-icons icon-pencil"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="card ">
+              <div class="card-header">
+                <h4 class="card-title"> Simple Table</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                      <th>
+                        Name
+                      </th>
+                      <th>
+                        Country
+                      </th>
+                      <th>
+                        City
+                      </th>
+                      <th class="text-center">
+                        Salary
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Dakota Rice
+                        </td>
+                        <td>
+                          Niger
+                        </td>
+                        <td>
+                          Oud-Turnhout
+                        </td>
+                        <td class="text-center">
+                          $36,738
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Minerva Hooper
+                        </td>
+                        <td>
+                          Curaçao
+                        </td>
+                        <td>
+                          Sinaai-Waas
+                        </td>
+                        <td class="text-center">
+                          $23,789
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Sage Rodriguez
+                        </td>
+                        <td>
+                          Netherlands
+                        </td>
+                        <td>
+                          Baileux
+                        </td>
+                        <td class="text-center">
+                          $56,142
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Philip Chaney
+                        </td>
+                        <td>
+                          Korea, South
+                        </td>
+                        <td>
+                          Overland Park
+                        </td>
+                        <td class="text-center">
+                          $38,735
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Doris Greene
+                        </td>
+                        <td>
+                          Malawi
+                        </td>
+                        <td>
+                          Feldkirchen in Kärnten
+                        </td>
+                        <td class="text-center">
+                          $63,542
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Mason Porter
+                        </td>
+                        <td>
+                          Chile
+                        </td>
+                        <td>
+                          Gloucester
+                        </td>
+                        <td class="text-center">
+                          $78,615
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td>
+                          Portugal
+                        </td>
+                        <td>
+                          Gloucester
+                        </td>
+                        <td class="text-center">
+                          $98,615
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav>
+            <ul>
+              <li>
+                <a href="#">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright float-right">
+          </div>
+      </footer>
+      </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="/download?filename=/websource/jquery.min.js"></script>
+    <script src="/download?filename=/websource/popper.min.js"></script>
+    <script src="/download?filename=/websource/bootstrap.min.js"></script>
+    <script src="/download?filename=/websource/perfect-scrollbar.jquery.min.js"></script>
+    <!-- Chart JS -->
+    <script src="/download?filename=/websource/chartjs.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="/download?filename=/websource/bootstrap-notify.js"></script>
+    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="/download?filename=/websource/black-dashboard.min.js"></script>
+    <script src="/download?filename=/websource/jscookies.min.js"></script>
+    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="/download?filename=/js/demo.js"></script>
+    <script src="/download?filename=/js/stylejs.js"></script>
     <script src="/download?filename=/js/index.js"></script>
+    <script src="/download?filename=/js/getuser.js"></script>
 </body>
+
 </html>

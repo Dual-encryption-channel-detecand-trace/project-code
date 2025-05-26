@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    index
+    user
   </title>
   
   <!--     Fonts and icons     -->
@@ -23,70 +23,66 @@
 
 <body class=" ">
   <div class="wrapper ">
-    <div class="sidebar" data-color="green">
+    <div class="sidebar">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
           {# <a href="#" class="simple-text logo-mini">Black</a> #}
-          <a href="#" class="simple-text logo-normal">功能</a>
+          <a href="/index" class="simple-text logo-normal">功能</a>
         </div>
         <ul class="nav">
           <li>
             <a href="/index">
               <i class="tim-icons icon-chart-pie-36"></i>
-              <p>主页</p>
-            </a>
-          </li>
-          <li class="active">
-            <a href="/upload">
-              <i class="tim-icons icon-wallet-43"></i>
-              <p>上传文件</p>
+              <p>Home</p>
             </a>
           </li>
           <li>
-            <a href="/history">
-              <i class="tim-icons icon-calendar-60"></i>
-              <p>提交历史</p>
+            <a href="/upload">
+              <i class="tim-icons icon-wallet-43"></i>
+              <p>上传文件</p>
             </a>
           </li>
           {%if debug%}
           <li>
             <a href="/icons">
               <i class="tim-icons icon-atom"></i>
-              <p>图标组件</p>
+              <p>Icons</p>
             </a>
           </li>
-          {# <li>
+          {%endif%}
+          <li>
             <a href="./notifications.html">
               <i class="tim-icons icon-bell-55"></i>
               <p>Notifications</p>
             </a>
-          </li> #}
-          <li>
-            <a href="./user.html">
+          </li>
+          <li class="active ">
+            <a href="/user">
               <i class="tim-icons icon-single-02"></i>
-              <p>用户组件</p>
+              <p>User Profile</p>
             </a>
           </li>
           <li>
             <a href="./tables.html">
               <i class="tim-icons icon-puzzle-10"></i>
-              <p>表格组件</p>
+              <p>Table List</p>
             </a>
           </li>
+          {%if debug%}
           <li>
             <a href="./typography.html">
               <i class="tim-icons icon-align-center"></i>
-              <p>弹窗组件</p>
+              <p>Typography</p>
             </a>
           </li>
           {%endif%}
         </ul>
       </div>
     </div>
-    <div class="main-panel" data-color="green">
+    <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
         <div class="container-fluid">
@@ -157,7 +153,7 @@
               <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
-                    <img src="/download?filename=/img/anime3.png">
+                    <img src="./assets/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
                   <p class="d-lg-none">
@@ -198,22 +194,129 @@
       </div>
       <!-- End Navbar -->
       <div class="content">
-      <div class="card">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
               <div class="card-header">
                 <h5 class="title">Edit Profile</h5>
               </div>
-              <form id="upload" action="/do/uploadpcap" method="post">
-                <div class="card-body">
-                      <div class="mb-4">
-                          <input id="uploadpcap" class="form-control" type="file" name="file" accept=".pcap" multiple required>
+              <div class="card-body">
+                <form>
+                  <div class="row">
+                    <div class="col-md-5 pr-md-1">
+                      <div class="form-group">
+                        <label>Company (disabled)</label>
+                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
                       </div>
-                </div>
-                <div class="card-footer">
-                  {# <button type="submit" class="btn btn-fill btn-primary">提交</button> #}
-                      <input type="submit" class="btn btn-fill btn-primary" value="提交文件"/>
-                </div>
-              </form>
+                    </div>
+                    <div class="col-md-3 px-md-1">
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" placeholder="Username" value="michael23">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-md-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" placeholder="mike@email.com">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+                      <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" placeholder="Company" value="Mike">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-md-1">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-md-1">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input type="text" class="form-control" placeholder="City" value="Mike">
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-md-1">
+                      <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-md-1">
+                      <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="number" class="form-control" placeholder="ZIP Code">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <label>About Me</label>
+                        <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-fill btn-primary">Save</button>
+              </div>
             </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card  card-user">
+              <div class="card-body ">
+                <p class="card-text">
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="#">
+                      <img class="avatar" src="./assets/img/anime6.png" alt="...">
+                      <h5 class="title">Mike Andrew</h5>
+                    </a>
+                    <p class="description">
+                      Ceo/Co-Founder
+                    </p>
+                  </div>
+                </p>
+                <p class="card-description">
+                  Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                </p>
+              </div>
+              <div class="card-footer ">
+                <div class="button-container">
+                  <button href="#" class="btn btn-icon btn-round btn-facebook">
+                    <i class="fab fa-facebook"></i>
+                  </button>
+                  <button href="#" class="btn btn-icon btn-round btn-twitter">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button href="#" class="btn btn-icon btn-round btn-google">
+                    <i class="fab fa-google-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <footer class="footer">
         <div class="container-fluid">
@@ -232,6 +335,10 @@
             </ul>
           </nav>
           <div class="copyright float-right">
+            ©
+            <script>
+              document.write(new Date().getFullYear())
+            </script> <a target="_blank" href="http://www.mobanwang.com/" title="网页模板">网页模板</a>.
           </div>
       </footer>
       </div>
@@ -276,23 +383,21 @@
         </ul>
       </div>
     </div>
-    <!--   Core JS Files   -->
+
     <script src="/download?filename=/websource/jquery.min.js"></script>
     <script src="/download?filename=/websource/popper.min.js"></script>
     <script src="/download?filename=/websource/bootstrap.min.js"></script>
     <script src="/download?filename=/websource/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Chart JS -->
+
     <script src="/download?filename=/websource/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
+
     <script src="/download?filename=/websource/bootstrap-notify.js"></script>
-    <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="/download?filename=/websource/black-dashboard.min.js"></script>
-    <script src="/download?filename=/websource/jscookies.min.js"></script>
-    <!-- Black Dashboard DEMO methods, don't include it in your project! -->
-    <script src="/download?filename=/js/demo.js"></script>
+
+    <script src="/download?filename=/js/black-dashboard.min.js"></script>
     <script src="/download?filename=/js/stylejs.js"></script>
-    <script src="/download?filename=/js/upload.js"></script>
-    <script src="/download?filename=/js/getuser.js"></script>
+
+    <!-- <script src="/download?filename=/js/demo.js"></script> -->
+    <script src="/download?filename=/js/user.js"></script>
 </body>
 
 </html>

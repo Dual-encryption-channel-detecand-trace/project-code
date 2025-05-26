@@ -104,13 +104,14 @@ class TlsCnnModel:
         :param labels: 标签列表（可选）
         :return: 特征和标签（如果提供标签）
         """
+        pcap_len=[]
         print(f"Start extracting TLS features...")
         features = []
         valid_labels = [] if labels is not None else None  # 用于存储与特征匹配的标签
 
         for idx, file in enumerate(pcap_files):
             label = labels[idx] if labels is not None else None
-            
+
             if label != None :
                 feat_file=Path(file).parent.parent/"features"/("tormeek" if label==1 else "normal")/(str(Path(file).stem)+".json")
                 if feat_file.is_file():
@@ -134,6 +135,7 @@ class TlsCnnModel:
                 features.append([0] * max_length)  # 添加全零特征向量
                 if labels is not None:
                     valid_labels.append(label)
+            pcap_len.append(len(feats))
 
         # 检查特征和标签数量是否一致
         if labels is not None and len(features) != len(valid_labels):
@@ -141,8 +143,8 @@ class TlsCnnModel:
 
         print(f"Features extraction completed. Total samples: {len(features)}")
         if labels is not None:
-            return np.array(features, dtype=np.float32), np.array(valid_labels, dtype=np.int64)
-        return np.array(features, dtype=np.float32)
+            return np.array(features, dtype=np.float32), np.array(valid_labels, dtype=np.int64), pcap_len
+        return np.array(features, dtype=np.float32), pcap_len
 
     def train(self, features, labels, epochs=20, batch_size=32, learning_rate=1e-3):
         """
@@ -218,7 +220,7 @@ class TlsCnnModel:
         """
         print("Start detecting...")
         # 提取特征
-        features = self.extract_features(pcap_files)
+        features ,pcap_len = self.extract_features(pcap_files)
 
         # 数据加载
         dataset = FlowDataset(features, labels=np.zeros(len(features)))  # 标签在检测时不需要
@@ -237,7 +239,7 @@ class TlsCnnModel:
                 predictions.extend(predicted.cpu().numpy())
 
         print(f"Detection completed. Total files detected: {len(pcap_files)}")
-        return predictions
+        return predictions, pcap_len
 
 
 class FlowDataset(Dataset):
@@ -262,11 +264,10 @@ class FlowDataset(Dataset):
             torch.tensor(self.labels[idx], dtype=torch.long)
         )
 
-
 if __name__ == "__main__":
     myAI = TlsCnnModel()
     # 提取特征和标签
-    features, labels = myAI.extract_features(train_files, train_labels)
+    features, labels, pcap_len = myAI.extract_features(train_files, train_labels)
 
     # 检查特征和标签
     print(f"Features shape: {features.shape}")

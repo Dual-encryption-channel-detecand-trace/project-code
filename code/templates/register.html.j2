@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    展示
+    index
   </title>
+  
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
@@ -17,7 +19,6 @@
   <link href="/download?filename=/css/black-dashboard.css" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/download?filename=/css/demo.css" rel="stylesheet" />
-  {# <link href="/download?filename=/img/default-avatar.png" rel="icon" style="image/png"> #}
 </head>
 
 <body class=" ">
@@ -28,66 +29,54 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          <a href="#" class="simple-text logo-mini"></a>
+          {# <a href="#" class="simple-text logo-mini">Black</a> #}
           <a href="#" class="simple-text logo-normal">功能</a>
         </div>
         <ul class="nav">
           <li>
             <a href="/index">
               <i class="tim-icons icon-chart-pie-36"></i>
-              <p>主页</p>
+              <p>Home</p>
             </a>
           </li>
-          <li>
+          <li class="active ">
             <a href="/upload">
               <i class="tim-icons icon-wallet-43"></i>
               <p>上传文件</p>
-            </a>
-          </li>
-          <li>
-            <a href="/history">
-              <i class="tim-icons icon-calendar-60"></i>
-              <p>提交历史</p>
-            </a>
-          </li>
-          <li>
-            <a href="/history">
-              <i class="tim-icons icon-check-2"></i>
-              <p>分析结果</p>
             </a>
           </li>
           {%if debug%}
           <li>
             <a href="/icons">
               <i class="tim-icons icon-atom"></i>
-              <p>图标组件</p>
-            </a>
-          </li>
-          {# <li>
-            <a href="./notifications.html">
-              <i class="tim-icons icon-bell-55"></i>
-              <p>Notifications</p>
-            </a>
-          </li> #}
-          <li>
-            <a href="./user.html">
-              <i class="tim-icons icon-single-02"></i>
-              <p>用户组件</p>
-            </a>
-          </li>
-          <li>
-            <a href="./tables.html">
-              <i class="tim-icons icon-puzzle-10"></i>
-              <p>表格组件</p>
-            </a>
-          </li>
-          <li>
-            <a href="./typography.html">
-              <i class="tim-icons icon-align-center"></i>
-              <p>弹窗组件</p>
+              <p>Icons</p>
             </a>
           </li>
           {%endif%}
+          <li>
+            <a href="/notifications">
+              <i class="tim-icons icon-bell-55"></i>
+              <p>Notifications</p>
+            </a>
+          </li>
+          <li>
+            <a href="/user">
+              <i class="tim-icons icon-single-02"></i>
+              <p>User Profile</p>
+            </a>
+          </li>
+          <li>
+            <a href="/tables">
+              <i class="tim-icons icon-puzzle-10"></i>
+              <p>Table List</p>
+            </a>
+          </li>
+          <li>
+            <a href="/typography">
+              <i class="tim-icons icon-align-center"></i>
+              <p>Typography</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -112,7 +101,54 @@
           </button>
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
-              <li id='aboutuser' class="dropdown nav-item">
+              <div class="search-bar input-group">
+                <!-- <input type="text" class="form-control" placeholder="Search...">
+      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
+                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
+                <!-- You can choose types of search input -->
+              </div>
+              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="tim-icons icon-simple-remove"></i>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div> -->
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="notification d-none d-lg-block d-xl-block"></div>
+                  <i class="tim-icons icon-sound-wave"></i>
+                  <p class="d-lg-none">
+                    New Notifications
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another notification</a>
+                  </li>
+                  <li class="nav-link">
+                    <a href="#" class="nav-item dropdown-item">Another one</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
                     <img src="/download?filename=/img/anime3.png">
@@ -131,7 +167,7 @@
                   </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="/do/logout" class="nav-item dropdown-item">退出登录</a>
+                    <a href="#" class="nav-item dropdown-item">Log out</a>
                   </li>
                 </ul>
               </li>
@@ -154,109 +190,47 @@
           </div>
         </div>
       </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header">
-                <h4 class="card-title">结果（文件）</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive ps">
-                  <table class="table tablesorter " id="resultpcaps">
-                    <thead class=" text-primary">
-                      <tr><th>
-                        文件名
-                      </th>
-                      <th>
-                        连接数
-                      </th>
-                      <th>
-                        总流量
-                      </th>
-                      <th>
-                        结论
-                      </th>
-                    </tr></thead>
-                    <tbody>
-                      {#
-                      <tr class="clickpcap">
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      #}
-                    </tbody>
-                  </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-              </div>
-            </div>
-
-            <div class="card ">
-              <div class="card-header">
-                <h4 class="card-title">结果（连接）</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive ps">
-                  <table class="table tablesorter " id="resultlinks">
-                    <thead class=" text-primary">
-                      <tr>
-                        <th>
-                          源ip
-                        </th>
-                        <th>
-                          目的ip
-                        </th>
-                        <th>
-                          流量
-                        </th>
-                        <th>
-                          结论
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {#
-                      <tr class="clicklink">
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                      </tr>
-                      #}
-                    </tbody>
-                  </table>
-                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">技术细节</h4>
-              </div>
-              <div id="">
-            </div>
-
-          </div>
-        </div>
-      </div>
       <!-- End Navbar -->
+      <div class="content">
+      <div class="card">
+              <div class="card-header">
+                <h5 class="title">注册</h5>
+              </div>
+              <form id="regfm">
+                <div class="card-body">
+                    <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                            <label>用户名</label>
+                            <input id="urname" name="urname" class="form-control" type="text" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input id="passwd" name="passwd" class="form-control" type="password" required/>
+                        </div>
+                    </div>
+                    <div class="col-md-3 px-md-1">
+                        <div class="form-group">
+                            <label>确认密码</label>
+                            <input id="passwd2" name="passwd2" class="form-control" type="password" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                  {# <button type="submit" class="btn btn-fill btn-primary">提交</button> #}
+                      <input type="submit" class="btn btn-fill btn-primary" value="注册"/>
+                </div>
+              </form>
+            </div>
+      </div>
       <footer class="footer">
         <div class="container-fluid">
           <nav>
             <ul>
               <li>
                 <a href="#">
-                  关于
+                  About Us
                 </a>
               </li>
               <li>
@@ -266,6 +240,8 @@
               </li>
             </ul>
           </nav>
+          <div class="copyright float-right">
+          </div>
       </footer>
       </div>
     </div>
@@ -324,8 +300,8 @@
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="/download?filename=/js/demo.js"></script>
     <script src="/download?filename=/js/stylejs.js"></script>
-    <script src="/download?filename=/js/show.js"></script>
-    <script src="/download?filename=/js/getuser.js"></script>
+    <script src="/download?filename=/js/upload.js"></script>
+    <script src="/download?filename=/js/register.js"></script>
 </body>
 
 </html>
