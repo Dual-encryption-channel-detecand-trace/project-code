@@ -30,7 +30,7 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          {# <a href="#" class="simple-text logo-mini">Black</a> #}
+          <a href="#" class="simple-text logo-mini"></a>
           <a href="#" class="simple-text logo-normal">功能</a>
         </div>
         <ul class="nav">
@@ -114,20 +114,14 @@
                     <img src="/download?filename=/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out
+                  <p id='username' class="d-lg-none">
+                    username
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="/do/logout" class="nav-item dropdown-item">退出登录</a>
+                    <a href="/do/logout" class="nav-item dropdown-item">登出</a>
                   </li>
                 </ul>
               </li>
@@ -158,7 +152,7 @@
               <div class="card-header ">
                 <div class="row">
                   <div class="col-sm-6 text-left">
-                    <h5 class="card-category">Total Shipments</h5>
+                    <h5 class="card-category"></h5>
                     <h2 class="card-title">Performance</h2>
                   </div>
                   <div class="col-sm-6">
@@ -188,8 +182,8 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Total Shipments</h5>
-                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary "></i> 763,215</h3>
+                <h5 class="card-category"></h5>
+                <h3 class="card-title"><i class="tim-icons text-primary "></i> 763,215</h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -201,8 +195,8 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Daily Sales</h5>
-                <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-info "></i> 3,500€</h3>
+                <h5 class="card-category"></h5>
+                <h3 class="card-title"><i class="tim-icons text-info "></i> 3,500</h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -214,8 +208,8 @@
           <div class="col-lg-4">
             <div class="card card-chart">
               <div class="card-header ">
-                <h5 class="card-category">Completed Tasks</h5>
-                <h3 class="card-title"><i class="tim-icons icon-send text-success "></i> 12,100K</h3>
+                <h5 class="card-category"></h5>
+                <h3 class="card-title"><i class="tim-icons text-success "></i> 12,100K</h3>
               </div>
               <div class="card-body ">
                 <div class="chart-area">
@@ -225,7 +219,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        {# <div class="row">
           <div class="col-lg-6 col-md-12">
             <div class="card card-tasks">
               <div class="card-header ">
@@ -505,7 +499,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> #}
       </div>
       <footer class="footer">
         <div class="container-fluid">
@@ -513,18 +507,16 @@
             <ul>
               <li>
                 <a href="#">
-                  About Us
+                  隧光
                 </a>
-              </li>
+              </li>|
               <li>
                 <a href="#">
-                  Blog
+                  隐流明鉴
                 </a>
               </li>
             </ul>
           </nav>
-          <div class="copyright float-right">
-          </div>
       </footer>
       </div>
     </div>

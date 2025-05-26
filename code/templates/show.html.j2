@@ -12,6 +12,7 @@
   <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
   <!-- Nucleo Icons -->
   <link href="/download?filename=/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/download?filename=/css/echartcss.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link href="/download?filename=/websource/bootstrap.min.css" rel="stylesheet" />
   <link href="/download?filename=/css/black-dashboard.css" rel="stylesheet" />
@@ -50,8 +51,8 @@
               <p>提交历史</p>
             </a>
           </li>
-          <li>
-            <a href="/history">
+          <li class="active">
+            <a>
               <i class="tim-icons icon-check-2"></i>
               <p>分析结果</p>
             </a>
@@ -118,20 +119,14 @@
                     <img src="/download?filename=/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out
+                  <p id='username' class="d-lg-none">
+                    username
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="/do/logout" class="nav-item dropdown-item">退出登录</a>
+                    <a href="/do/logout" class="nav-item dropdown-item">登出</a>
                   </li>
                 </ul>
               </li>
@@ -242,6 +237,7 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">技术细节</h4>
+                <div id='protocals'class="echarts"></div>
               </div>
               <div id="">
             </div>
@@ -256,12 +252,12 @@
             <ul>
               <li>
                 <a href="#">
-                  关于
+                  隧光
                 </a>
-              </li>
+              </li>|
               <li>
                 <a href="#">
-                  Blog
+                  隐流明鉴
                 </a>
               </li>
             </ul>
@@ -326,6 +322,8 @@
     <script src="/download?filename=/js/stylejs.js"></script>
     <script src="/download?filename=/js/show.js"></script>
     <script src="/download?filename=/js/getuser.js"></script>
+    <script src="/download?filename=/js/genchart.js"></script>
+    <script src="/download?filename=/websource/echart.min.js"></script>
 </body>
 
 </html>

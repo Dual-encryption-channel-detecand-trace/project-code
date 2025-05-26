@@ -24,7 +24,6 @@ $(() =>
                 }
             ,   error: (xhr) =>
                 {
-                    alert(xhr.status)
                     alert("登录失败");
                 }
             }

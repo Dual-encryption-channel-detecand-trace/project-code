@@ -4,7 +4,10 @@ var result;
 
 function showdetail(pcapid=0,linkid=0)
 {
+
     let linkdetail=result[pcapid].pcapdetail[linkid].linkdetail;
+    console.log(linkdetail);
+    circlegraph(linkdetail,{name:'proto',value:'bytes'},'各协议流量占比','protocals');
 }
 function showlinks(pcapid=0)
 {
@@ -21,11 +24,11 @@ function showlinks(pcapid=0)
         $row.append($cell);
         let cnt=pcapdetail[i].countflow;
         if(cnt>1024*1024)
-            $cell=$(`<td>${1.0*cnt/1024/1024}Mib</td>`);
+            $cell=$(`<td>${(1.0*cnt/1024/1024).toFixed(2)} MB</td>`);
         else if(cnt>1024)
-            $cell=$(`<td>${1.0*cnt/1024}Kib</td>`);
+            $cell=$(`<td>${(1.0*cnt/1024).toFixed(2)} KB</td>`);
         else
-            $cell=$(`<td>${cnt}bit</td>`);
+            $cell=$(`<td>${cnt} Byte</td>`);
         $row.append($cell);
         $cell=$(`<td>${pcapdetail[i].result}</td>`);
         $row.append($cell);
@@ -37,6 +40,7 @@ function showlinks(pcapid=0)
         });
         $tablebody.append($row);
     }
+    showdetail(pcapid);
 }
 function showpcaps()
 {
@@ -52,11 +56,11 @@ function showpcaps()
         $row.append($cell);
         let cnt=result[i].countflow;
         if(cnt>1024*1024)
-            $cell=$(`<td>${1.0*cnt/1024/1024}Mib</td>`);
+            $cell=$(`<td>${(1.0*cnt/1024/1024).toFixed(2)} MB</td>`);
         else if(cnt>1024)
-            $cell=$(`<td>${1.0*cnt/1024}Kib</td>`);
+            $cell=$(`<td>${(1.0*cnt/1024).toFixed(2)} KB</td>`);
         else
-            $cell=$(`<td>${cnt}bit</td>`);
+            $cell=$(`<td>${cnt} Byte</td>`);
         $row.append($cell);
         $cell=$(`<td>${result[i].result}</td>`);
         $row.append($cell);
@@ -110,7 +114,6 @@ $(() =>
                         return ;
                     }
                     result=response.result;
-                    console.log(result)
                     showpcaps();
                     // 获取信息成功
                 }

@@ -1,4 +1,3 @@
-
 function getuserinfo(callback)
 {
     let userinfo=null;
@@ -11,23 +10,13 @@ function getuserinfo(callback)
     ,   success: (response)=>
         {
             userinfo=response.userinfo;
-            if(callback!==undefined)
-                callback(userinfo);
         }
     ,   error: (xhr)=>
         {
             $('#aboutuser').html('<li id="aboutuser" class="dropdown nav-item"><a href="/login">登录</a></li>')
+            let $regi=$('<li class="dropdown nav-item"><a href="/register">注册</a></li>');
+            $('#aboutuser').after($regi);
         }
     });
-    return userinfo;
-    // getcookie
-    // if not found 
-    // return 
-    // else send cookie
-    // if 过期
-    // alert("登录信息过期")
-    // else
-    // 更改header
-    // 设置userinfo
 }
 $(getuserinfo());

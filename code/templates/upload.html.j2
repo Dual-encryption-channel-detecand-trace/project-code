@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    index
+    上传文件
   </title>
   
   <!--     Fonts and icons     -->
@@ -29,7 +29,7 @@
     -->
       <div class="sidebar-wrapper">
         <div class="logo">
-          {# <a href="#" class="simple-text logo-mini">Black</a> #}
+          <a href="#" class="simple-text logo-mini"></a>
           <a href="#" class="simple-text logo-normal">功能</a>
         </div>
         <ul class="nav">
@@ -107,73 +107,20 @@
           </button>
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto ">
-              <div class="search-bar input-group">
-                <!-- <input type="text" class="form-control" placeholder="Search...">
-      <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> -->
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i></button>
-                <!-- You can choose types of search input -->
-              </div>
-              <!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <i class="tim-icons icon-simple-remove"></i>
-          </button>
-        </div>
-
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> -->
-              <li class="dropdown nav-item">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                  <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <i class="tim-icons icon-sound-wave"></i>
-                  <p class="d-lg-none">
-                    New Notifications
-                  </p>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another notification</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Another one</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="dropdown nav-item">
+              <li id='aboutuser' class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="photo">
                     <img src="/download?filename=/img/anime3.png">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  <p class="d-lg-none">
-                    Log out
+                  <p id='username' class="d-lg-none">
+                    username
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Profile</a>
-                  </li>
-                  <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Settings</a>
-                  </li>
                   <div class="dropdown-divider"></div>
                   <li class="nav-link">
-                    <a href="#" class="nav-item dropdown-item">Log out</a>
+                    <a href="/do/logout" class="nav-item dropdown-item">登出</a>
                   </li>
                 </ul>
               </li>
@@ -200,7 +147,7 @@
       <div class="content">
       <div class="card">
               <div class="card-header">
-                <h5 class="title">Edit Profile</h5>
+                <h5 class="title">提交文件</h5>
               </div>
               <form id="upload" action="/do/uploadpcap" method="post">
                 <div class="card-body">
@@ -221,18 +168,16 @@
             <ul>
               <li>
                 <a href="#">
-                  About Us
+                  隧光
                 </a>
-              </li>
+              </li>|
               <li>
                 <a href="#">
-                  Blog
+                  隐流明鉴
                 </a>
               </li>
             </ul>
           </nav>
-          <div class="copyright float-right">
-          </div>
       </footer>
       </div>
     </div>

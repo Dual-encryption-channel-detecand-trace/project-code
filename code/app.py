@@ -3,11 +3,14 @@ from pathlib import Path
 import random
 import string
 from module.TlsCnnModel import TlsCnnModel as myAI
+from module.getdetail import getdetail
 import asyncio
 import json
 import sqlite3
 
+
 from module.splitpcap import split_pcap_by_ip 
+
 
 # 页面初始设置
 app=Flask(__name__)
@@ -15,7 +18,17 @@ app.debug=1
 filedir=Path(__file__).parent
 temporarydir=Path("D:\\pcap")
 
+# 数据库
 dbpath=temporarydir/'mydb.db'
+if not dbpath.exists():
+    conn = sqlite3.connect(str(dbpath))
+    cursor = conn.cursor()
+
+    cursor.execute('CREATE TABLE users (uid INTEGER PRIMARY KEY AUTOINCREMENT, urname TEXT, passwd TEXT)')
+    cursor.execute('CREATE TABLE cookies (ucookie CHARACTER(16) PRIMARY KEY, user INTEGER, effectime INTEGER)')
+    cursor.execute('CREATE TABLE pcaps (pcapid CHARACTER(16) PRIMARY KEY, owner INTEGER,updtime TEXT,fcount INTEGER)')
+    conn.close()
+    
 
 # 食用函数
 # 随机字符串
@@ -28,15 +41,13 @@ def randstr(len):
 def checkucookie(ucookie):
     conn = sqlite3.connect(str(dbpath))
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM cookies")
-    quecoo=cursor.fetchall()
     cursor.execute("SELECT effectime FROM cookies WHERE ucookie = ?",(ucookie,))
     quecoo=cursor.fetchone()
     if quecoo==None:
         conn.close()
         return False
     effectime=quecoo[0]
-    cursor.execute("SELECT unixepoch('now')")
+    cursor.execute("SELECT unixepoch('now') ")
     nowtime=cursor.fetchone()[0]
     if(nowtime>effectime):
         cursor.execute("DELETE FROM cookies WHERE ucookie = ?",(ucookie,))
@@ -45,6 +56,28 @@ def checkucookie(ucookie):
         return False
     conn.close()
     return True
+
+def groupbytormeek(result):
+    i=0
+    j=len(result)-1
+    while i<j:
+        while i<j and result[j]['result']=='normal':
+            j=j-1
+        while i<j and result[i]['result']=='tormeek':
+            i=i+1
+        if i<j:
+            result[i],result[j]=result[j],result[i]
+    
+    for filedetail in result:
+        filedetail=filedetail['pcapdetail']
+        i=0
+        j=len(filedetail)-1
+        while i<j:
+            while i<j and filedetail[j]['result']=='normal':
+                j=j-1
+            while i<j and filedetail[i]['result']=='tormeek':
+                i=i+1
+            filedetail[i],filedetail[j]=filedetail[j],filedetail[i]
 
 def checkpcapowner(ucookie,pcapid):
     conn = sqlite3.connect(str(dbpath))
@@ -116,47 +149,8 @@ def show():
     报告页面路由
     """
     ucookie=request.cookies.get("ucookie")
-    if(checkucookie(ucookie)):
-        "please relogin",401
-    results=[]
-    # fileplace=request.json.get("flieplace")
-    # if(fileplace==None and app.debug):
-    #     return render_template("show.html.j2",results={},debug=app.debug)
-
-    # # 获取灵饰位置                                            # 获取访问位置
-    # dir=temporarydir/"temporary"/fileplace                                           # 得到实际路径
-
-    # # 从零时位置检测是否已存在结果文件
-    # result_file=dir/"result.json"                                                # 结果文件
-    # if result_file.exists() and app.debug==False:
-    #     with open(result_file,"r") as f:
-    #         results=json.load(f)
-    # else:
-    #     # 从灵石位置获取pcap文件
-    #     files=dir.glob("*.pcap")                                                 # 通配符查找所有文件
-    #     files=list(map(lambda x:str(x),files))                                   # 转文件名为 str
-
-    #     # 运行AI
-    #     loop=asyncio.new_event_loop()                                            # pyshark太傻了，没有loop就不跑了
-    #     asyncio.set_event_loop(loop)
-    #     results,pcap_len=myai.detect(files)
-    #     loop.close()
-    #     print(results)
-    #     # 返回结果
-    #     files=list(map(lambda file:str(Path(file).name),files))                  # 整理文件名
-    #     i=0
-    #     realresult=[]
-    #     for idx, file in enumerate(files):
-    #         is_tormeek=0
-    #         for _ in range(0,pcap_len[idx]):
-    #             is_tormeek+=results[i]
-    #             i=i+1
-    #         realresult.append(is_tormeek)
-    #     results=realresult
-    #     results=map(lambda result:"tormeek" if result!=0 else "normal",results)
-    #     results=list(zip(files,results))
-    #     with open(result_file,"w") as f:                                         # 导出结果到文件
-    #         json.dump(results,f)
+    if not checkucookie(ucookie):
+        return jsonify(fail="please relogin"),401
     return render_template("show.html.j2",debug=app.debug)
 
 # 食用功能
@@ -178,7 +172,7 @@ def uploadpcap():
     功能路由
     """
     ucookie=request.cookies.get("ucookie")
-    if(checkucookie(ucookie)):
+    if not checkucookie(ucookie):
         "please relogin",401
     temdir=temporarydir/"temporary"
     if not temdir.exists():
@@ -218,36 +212,6 @@ def uploadpcap():
             conn.commit()
             conn.close()
     return jsonify(fid=chunkinfo['fid'])
-    # if(fileplace==None):
-    #     pass
-    # if 'files' not in request.files:
-    #     return "未上传文件",400
-    # else:
-    #     files=request.files.getlist("files")
-    #     for file in files:
-    #         if checkfile(file)==False:
-    #             return "存在不合法文件",400
-    #     # 存放零食文件
-    #     temdir=temporarydir/"temporary"
-    #     if not temdir.exists():
-    #         temdir.mkdir()
-    #     place=""
-    #     savepath=None
-    #     while savepath==None or savepath.exists():
-    #         place=randstr(16) # 随机文件夹名
-    #         savepath=temdir/place
-    #     savepath.mkdir()
-    #     for file in files:
-    #         file.save(str(savepath/file.filename))
-    #         file.close()
-        
-    #     redirect_url=url_for("show",files=place)
-    #     runai_url=url_for("runai",files=place)
-    #     return jsonify(
-    #         success=True,
-    #         redirect_url=redirect_url,
-    #         runai_url=runai_url
-    #     )
 
 # 获取信息
 pcaplock=[]
@@ -274,7 +238,6 @@ def runai():
     
     pcaplock.append(fileplace)                                                       # 上锁
     
-
     for f in dir.iterdir():
         if f.is_file() and f.suffix=='.pcap':
             split_pcap_by_ip(f.name,dir)
@@ -295,34 +258,18 @@ def runai():
                 linkresult['srcip']=ippair.split('-')[0]
                 linkresult['dstip']=ippair.split('-')[1]
                 linkresult['result']=("tormeek" if fileresult[0][idx] !=0 else "normal")
-                linkresult['detail']='1'
-                linkresult['countflow']=1
+                linkresult['linkdetail']=getdetail(linkfile)
+                linkresult['countflow']=linkfile.stat().st_size
                 filetype=filetype or fileresult[0][idx]
                 fileresult_.append(linkresult.copy())
             fileresult={}
             fileresult['pcapdetail']=fileresult_
             fileresult['filename']=f.name+'.pcap'
             fileresult['countlink']=len(files)
-            fileresult['countflow']=1
+            fileresult['countflow']=sum(ff.stat().st_size for ff in f.rglob('*'))
             fileresult['result']=("tormeek" if filetype!=False else "normal")
             result.append(fileresult.copy())
-
-    # files=list(map(lambda x:str(x),files_))                                       # 转文件名为 str
-
-    # for f in dir.iterdir():
-    #     if f.is_file() and f.suffix=='.pcap':
-    #         split_pcap_by_ip(f.name,dir)
-    # results=myai.detect(files)
-    
-    # # 返回结果
-    # results=map(lambda result:"tormeek" if result!=0 else "normal",results)
-    # results_=[]
-    # for idx,f in enumerate(files):
-    #     fname=Path(f).parent.name+".pcap"
-    #     ippair=Path(f).stem
-    #     results_.append([,results[idx]])
-    # files=map(lambda file:str(Path(file).parent.name)+".pcap",files)                            # 整理结果与文件名
-    # results=list(zip(files,results))
+    groupbytormeek(result)
     with open(result_file,"w") as f:                                             # 导出结果到文件
         json.dump(result,f)
     
@@ -330,6 +277,9 @@ def runai():
 
     # for f in dir.rglob('*.pcap'):
     #     f.unlink()
+    # for f in dir.iterdir():
+    #     if f.is_dir():
+    #         f.rmdir()
     loop.close()
     return "OK",204
 
@@ -433,8 +383,23 @@ def do_register():
 @app.route("/do/userinfo",methods=['GET','POST'])
 def do_getuserinfo():
     ucookie=request.cookies.get("ucookie")
-    if(checkucookie(ucookie)):
-        jsonify(unsuccess="please relogin"),401
+    if not checkucookie(ucookie) :
+        return jsonify(unsuccess="please relogin"),401
+    conn = sqlite3.connect(str(dbpath))
+    cursor = conn.cursor()
+    cursor.execute("SELECT user FROM cookies WHERE ucookie = ? ",(ucookie,))
+    uid=cursor.fetchone()[0]
+    cursor.execute("SELECT uid FROM users WHERE uid= ? ",(uid,))
+    quepcp=cursor.fetchone()
+    userinfo={'uid':quepcp[0]}
+    conn.close()
+    return jsonify(userinfo=userinfo)
+
+@app.route("/do/gethistory",methods=['GET','POST'])
+def do_gethistory():
+    ucookie=request.cookies.get("ucookie")
+    if not checkucookie(ucookie):
+        return jsonify(unsuccess="please relogin"),401
     conn = sqlite3.connect(str(dbpath))
     cursor = conn.cursor()
     cursor.execute("SELECT user FROM cookies WHERE ucookie = ? ",(ucookie,))
@@ -442,10 +407,8 @@ def do_getuserinfo():
     cursor.execute("SELECT pcapid, updtime, fcount FROM pcaps WHERE owner= ? ORDER BY updtime DESC ",(uid,))
     quepcp=cursor.fetchall()
     history=[{'fileplace': item[0], 'updtime' : item[1], 'fcount' :item[2] } for item in quepcp]
-    userinfo={'history':history}
     conn.close()
-    return jsonify(userinfo=userinfo)
-
+    return jsonify(history=history)
 
 @app.route("/do/logout",methods=['GET','POST'])
 def logout():
