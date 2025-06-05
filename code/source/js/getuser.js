@@ -13,7 +13,10 @@ function getuserinfo(callback)
         }
     ,   error: (xhr)=>
         {
-            $('#aboutuser').html('<li id="aboutuser" class="dropdown nav-item"><a href="/login">登录</a></li>')
+            let $aboutuser=$('#aboutuser');
+            $aboutuser.after($('<li id="aboutuser" class="dropdown nav-item"><a href="/login">登录</a></li>'));
+            $aboutuser.remove();
+            $aboutuser=$('#aboutuser');
             let $regi=$('<li class="dropdown nav-item"><a href="/register">注册</a></li>');
             $('#aboutuser').after($regi);
         }

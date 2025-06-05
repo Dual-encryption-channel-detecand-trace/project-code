@@ -27,11 +27,7 @@ $(()=>{
             }
         }
     ,   error: (xhr)=>
-        {
-            $('#aboutuser').html('<li id="aboutuser" class="dropdown nav-item"><a href="/login">登录</a></li>')
-            let $regi=$('<li class="dropdown nav-item"><a href="/register">注册</a></li>');
-            $('#aboutuser').after($regi);
-        }
+        {}
     });
     return userinfo;
 });
