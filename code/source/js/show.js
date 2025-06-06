@@ -4,10 +4,25 @@ var result;
 
 function showdetail(pcapid=0,linkid=0)
 {
-
     let linkdetail=result[pcapid].pcapdetail[linkid].linkdetail;
     console.log(linkdetail);
-    circlegraph(linkdetail,{name:'proto',value:'bytes'},'各协议流量占比','protocals');
+    circlegraph(linkdetail.protoflow,{name:'proto',value:'bytes'},'各协议流量占比','protocals');
+    let $showfeatuer=$('#showfeatuer');
+    $showfeatuer.empty();
+    let $head=$('<h5>部分特征展示</h5>');
+    $showfeatuer.append($head);
+    let $text=$(`<p>ClientHello 版本:${Math.round(linkdetail.feature[0])}</p>`);
+    $showfeatuer.append($text);
+    $text=$(`<p>密码套件数量:${Math.round(linkdetail.feature[1])}</p>`);
+    $showfeatuer.append($text);
+    $text=$(`<p>extension数量:${Math.round(linkdetail.feature[2])}</p>`);
+    $showfeatuer.append($text);
+    let textsr;
+    if(linkdetail.feature[3]>0.9)
+        textsr='是'
+    else textsr='否'
+    $text=$(`<p>是否使用了伪造的服务器:${textsr}</p>`);
+    $showfeatuer.append($text);
 }
 function showlinks(pcapid=0)
 {

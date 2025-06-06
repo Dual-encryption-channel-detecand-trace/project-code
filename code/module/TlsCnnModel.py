@@ -239,7 +239,7 @@ class TlsCnnModel:
                 predictions.extend(predicted.cpu().numpy())
 
         print(f"Detection completed. Total files detected: {len(pcap_files)}")
-        return predictions, pcap_len
+        return predictions, pcap_len, features
 
 
 class FlowDataset(Dataset):

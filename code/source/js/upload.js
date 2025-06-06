@@ -155,7 +155,7 @@ $(()=>{
         const fileplace=randomString();
         if(fcount==1)
         {
-            uploadpcap(files,{chunkSize:chunkSize,fid:0,url:url},$tablex);
+            uploadpcap(files,{chunkSize:chunkSize,fid:0,url:url,fileplace:fileplace},$tablex);
             return ;
         }
         for (let i = 0; i+1 < fcount; i++) {

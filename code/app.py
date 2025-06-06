@@ -258,7 +258,11 @@ def runai():
                 linkresult['srcip']=ippair.split('-')[0]
                 linkresult['dstip']=ippair.split('-')[1]
                 linkresult['result']=("tormeek" if fileresult[0][idx] !=0 else "normal")
-                linkresult['linkdetail']=getdetail(linkfile)
+                linkresult['linkdetail']={}
+                linkresult['linkdetail']['protoflow']=getdetail(linkfile)
+                linkresult['linkdetail']['feature']=[]
+                for feature in fileresult[2][idx]:
+                    linkresult['linkdetail']['feature'].append(float(feature))
                 linkresult['countflow']=linkfile.stat().st_size
                 filetype=filetype or fileresult[0][idx]
                 fileresult_.append(linkresult.copy())
