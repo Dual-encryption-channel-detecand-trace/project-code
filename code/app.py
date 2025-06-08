@@ -240,9 +240,9 @@ def runai():
     
     pcaplock.append(fileplace)                                                       # 上锁
     
-    # for f in dir.iterdir():
-    #     if f.is_file() and f.suffix=='.pcap':
-    #         split_pcap_by_ip(f.name,dir)
+    for f in dir.iterdir():
+        if f.is_file() and f.suffix=='.pcap':
+            split_pcap_by_ip(f.name,dir)
     myai=myAI()
     # 从灵石位置获取pcap文件
     result=[]
