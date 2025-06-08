@@ -11,11 +11,11 @@ function showdetail(pcapid=0,linkid=0)
     $showfeatuer.empty();
     let $head=$('<h5>部分特征展示</h5>');
     $showfeatuer.append($head);
-    let $text=$(`<p>ClientHello 版本:${Math.round(linkdetail.feature[0])}</p>`);
+    let $text=$(`<p>ClientHello 版本:${Math.round(linkdetail.meekfeature[0])}</p>`);
     $showfeatuer.append($text);
-    $text=$(`<p>密码套件数量:${Math.round(linkdetail.feature[1])}</p>`);
+    $text=$(`<p>密码套件数量:${Math.round(linkdetail.meekfeature[1])}</p>`);
     $showfeatuer.append($text);
-    $text=$(`<p>extension数量:${Math.round(linkdetail.feature[2])}</p>`);
+    $text=$(`<p>extension数量:${Math.round(linkdetail.meekfeature[2])}</p>`);
     $showfeatuer.append($text);
     let textsr;
     if(linkdetail.feature[3]>0.9)

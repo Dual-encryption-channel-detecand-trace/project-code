@@ -200,10 +200,12 @@ def predict_single_pcap(model, pcap_file, device):
 def detect_on_directory(model, target_dir, device):
     pcap_files = list(Path(target_dir).glob("*.pcap"))
     print(f"检测目录: {target_dir} ，共{len(pcap_files)}个pcap文件")
+    result={}
     for f in pcap_files:
         label, prob = predict_single_pcap(model, f, device)
         label_name = "obfs" if label == 1 else "normal"
-        print(f"{f.name} -> 预测类别: {label_name}, 概率: {prob:.4f}")
+        result[f.name]=(label_name,prob)
+    return result
 
 def main():
     # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -229,9 +231,22 @@ def main():
     # # 模型保存
     # torch.save(model.state_dict(), "obfs_cnn_model.pth")
     # print("Model saved as obfs_cnn_model.pth")
-    model = ObfsCNNClassifier().to("cuda")
-    model.load_state_dict(torch.load("obfs_cnn_model.pth", map_location="cuda"))
-    detect_on_directory(model, "D:/pcap/target", "cuda")
+
+    # model = ObfsCNNClassifier().to("cpu")
+    # model.load_state_dict(torch.load("D:\DTDEC\project-code\code\module\obfs_cnn_model.pth", map_location="cpu"))
+    # rresult=detect_on_directory(model,r'D:\DTDEC\obfs_1c1g_2020-06-25_00_01_03.016746.pcap','cpu')
+    # print(rresult)
+
+    # detect_on_directory(model, "D:/pcap/target", "cuda")
+
+
+    pass
 
 if __name__ == "__main__":
-    main()
+    model = ObfsCNNClassifier().to("cpu")
+    model.load_state_dict(torch.load("D:\DTDEC\project-code\code\module\obfs_cnn_model.pth", map_location="cpu"))
+    rresult=detect_on_directory(model,r'D:\pcap\temporary\testobfss','cpu')
+    print(rresult)
+    # rresult=list(rresult)
+    # rresult=list(map(lambda x:x[0],rresult))
+    # print('obfs'in rresult)

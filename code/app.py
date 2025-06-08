@@ -5,18 +5,22 @@ import string
 from module.TlsCnnModel import TlsCnnModel as myAI
 from module.getdetail import getdetail
 import asyncio
+from module.obfsmodel import ObfsCNNClassifier,detect_on_directory
 import json
 import sqlite3
-
-
 from module.splitpcap import split_pcap_by_ip 
 
+import torch
+
+modeldir=r"D:\DTDEC\project-code\code\module\obfs_cnn_model.pth"
 
 # 页面初始设置
 app=Flask(__name__)
 app.debug=1
 filedir=Path(__file__).parent
-temporarydir=Path("D:\\pcap")
+temporarydir=Path(r"D:\pcap")
+if not (temporarydir/"temporary").exists():
+    (temporarydir/"temporary").mkdir()
 
 # 数据库
 dbpath=temporarydir/'mydb.db'
@@ -175,8 +179,6 @@ def uploadpcap():
     if not checkucookie(ucookie):
         "please relogin",401
     temdir=temporarydir/"temporary"
-    if not temdir.exists():
-        temdir.mkdir()
     
     chunk = request.files['chunk']
     chunkinfo = json.loads(request.form['chunkInfo'])
@@ -238,52 +240,73 @@ def runai():
     
     pcaplock.append(fileplace)                                                       # 上锁
     
-    for f in dir.iterdir():
-        if f.is_file() and f.suffix=='.pcap':
-            split_pcap_by_ip(f.name,dir)
+    # for f in dir.iterdir():
+    #     if f.is_file() and f.suffix=='.pcap':
+    #         split_pcap_by_ip(f.name,dir)
     myai=myAI()
     # 从灵石位置获取pcap文件
     result=[]
+    usage=torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    obfsai=ObfsCNNClassifier().to(usage)
+    obfsai.load_state_dict(torch.load(modeldir, map_location=usage))
+    obfsresult=detect_on_directory(obfsai,dir,usage)
     for f in dir.iterdir():
         if f.is_dir():
-            files=f.rglob("*")
+            files=f.glob("*")
             files=list(map(lambda x:str(x),files))
             fileresult=myai.detect(files)
             fileresult_=[]
-            filetype=False
+            filetype=[]
             for idx,linkfile in enumerate(files):
+                filename=Path(files[idx]).name
+                # fileobfsresult=obfsresult[filename]
                 linkfile=Path(linkfile)
                 linkresult={}
                 ippair=linkfile.stem
-                linkresult['srcip']=ippair.split('-')[0]
-                linkresult['dstip']=ippair.split('-')[1]
-                linkresult['result']=("tormeek" if fileresult[0][idx] !=0 else "normal")
-                linkresult['linkdetail']={}
-                linkresult['linkdetail']['protoflow']=getdetail(linkfile)
-                linkresult['linkdetail']['feature']=[]
+                linkresult["srcip"]=ippair.split("-")[0]
+                linkresult["dstip"]=ippair.split("-")[1]
+                linktype=[]
+                if fileresult[0][idx] !=0:
+                    linktype.append("tormeek")
+                    if "tormeek" not in filetype:
+                        filetype.append("tormeek")
+                # if fileobfsresult[0]=="obfs":
+                #     linktype.append("obfs")
+                #     if "obfs" not in filetype:
+                #         filetype.append("obfs")
+                linkresult["result"]='&'.join(linktype)
+                if linkresult["result"]=="":
+                    linkresult["result"]="normal"
+                linkresult["linkdetail"]={}
+                linkresult["linkdetail"]["protoflow"]=getdetail(linkfile)
+                linkresult["linkdetail"]["meekfeature"]=[]
                 for feature in fileresult[2][idx]:
-                    linkresult['linkdetail']['feature'].append(float(feature))
-                linkresult['countflow']=linkfile.stat().st_size
-                filetype=filetype or fileresult[0][idx]
+                    linkresult["linkdetail"]["meekfeature"].append(float(feature))
+                linkresult["countflow"]=linkfile.stat().st_size
                 fileresult_.append(linkresult.copy())
             fileresult={}
-            fileresult['pcapdetail']=fileresult_
-            fileresult['filename']=f.name+'.pcap'
-            fileresult['countlink']=len(files)
-            fileresult['countflow']=sum(ff.stat().st_size for ff in f.rglob('*'))
-            fileresult['result']=("tormeek" if filetype!=False else "normal")
+            fileresult["pcapdetail"]=fileresult_
+            fileresult["filename"]=f.name+".pcap"
+            fileresult["countlink"]=len(files)
+            fileresult["countflow"]=sum(ff.stat().st_size for ff in f.rglob("*"))
+            if fileresult["filename"] in obfsresult and obfsresult[fileresult["filename"]][0]!="normal":
+                filetype.append(obfsresult[fileresult["filename"]][0])
+            fileresult["result"]="&".join(filetype)
+            if fileresult["result"]=="":
+                fileresult["result"]="normal"
+            # fileresult['result']=("tormeek" if filetype!=False else "normal")
             result.append(fileresult.copy())
     groupbytormeek(result)
     with open(result_file,"w") as f:                                             # 导出结果到文件
         json.dump(result,f)
     
     pcaplock.remove(fileplace)                                                       # 解锁
-
-    # for f in dir.rglob('*.pcap'):
-    #     f.unlink()
-    # for f in dir.iterdir():
-    #     if f.is_dir():
-    #         f.rmdir()
+    if not app.debug:
+        for f in dir.rglob('*.pcap'):
+            f.unlink()
+        for f in dir.iterdir():
+            if f.is_dir():
+                f.rmdir()
     loop.close()
     return "OK",204
 
